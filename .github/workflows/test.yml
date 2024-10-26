@@ -1,6 +1,10 @@
 name: 打包Vue项目
 
-on: push
+on:
+  push:
+    branches:
+      - main # 或者是你的默认分支名
+
 permissions:
   contents: write
 
@@ -19,13 +23,10 @@ jobs:
           npm run build
 
       - name: 部署
+        id: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages  # 分支
-          github_token: ${{ secrets.DEPLOY_PAT }} # 使用PAT
-     
-          publish_dir: ./dist # 假设你的构建输出目录是`dist`
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # 构建输出目录
           publish_branch: gh-pages # 部署到`gh-pages`分支
-          # floder: build # 生产环境文件会在分支的build文件夹里
-
-
+          force_orphan: true # 强制清空目标分支的内容
