@@ -1,6 +1,8 @@
 name: 打包Vue项目
 
 on: push
+permissions:
+  contents: write
 
 jobs:
   npm-build:
@@ -11,8 +13,14 @@ jobs:
       - name: 读取仓库内容
         uses: actions/checkout@v4
 
-      - name: 安装依赖
-        run: npm install
+      - name: 安装依赖，项目打包
+        run: |
+          npm install
+          npm run build
 
-      - name: 项目打包
-        run: npm run build
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@4
+        with:
+          branch: gh-pages  # 分支
+          floder: build # 生产环境文件会在分支的build文件夹里
+
