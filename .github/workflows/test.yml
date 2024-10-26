@@ -19,7 +19,7 @@ jobs:
           npm run build
 
       - name: 部署
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: jamesives/github-pages-deploy-action@latest
         with:
           branch: gh-pages  # 分支
           floder: build # 生产环境文件会在分支的build文件夹里
