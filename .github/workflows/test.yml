@@ -20,7 +20,7 @@ jobs:
       - name: 安装依赖，项目打包
         run: |
           npm install
-          npm run build
+          npm run dev
 
       - name: 部署
         id: deploy
