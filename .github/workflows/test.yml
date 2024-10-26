@@ -18,9 +18,17 @@ jobs:
           npm install
           npm run build
 
+      # - name: 部署
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     branch: gh-pages  # 分支
+      #     floder: build # 生产环境文件会在分支的build文件夹里
       - name: 部署
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages  # 分支
+          github_token: ${{ secrets.DEPLOY_PAT }} # 使用PAT
+          publish_dir: ./dist # 假设你的构建输出目录是`dist`
+          publish_branch: gh-pages # 部署到`gh-pages`分支
           floder: build # 生产环境文件会在分支的build文件夹里
+          # force_orphan: true # 强制清空目标分支的内容
 
