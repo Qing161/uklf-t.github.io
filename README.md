@@ -7,7 +7,7 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
 
 
-这段文本看起来像是一份通过命令行（例如Windows命令提示符cmd.exe）列出的目录内容。这里展示的是位于 `C:\Users\thinkpad\Desktop\my-vue-app` 的目录结构及文件列表。让我们来解析一下每个条目：
+这段文本看起来是一份通过命令行（例如Windows命令提示符cmd.exe）列出的目录内容。这里展示的是位于 `C:\Users\thinkpad\Desktop\my-vue-app` 的目录结构及文件列表。让我们来解析一下每个条目：
 
 1. **目录条目**:
    - `.` 表示当前目录。

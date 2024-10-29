@@ -1,10 +1,32 @@
-on: push
+name: 打包Vue项目
+
+on:
+  push:
+    branches:
+      - main # 或者是你的默认分支名
+
+permissions:
+  contents: write
 
 jobs:
   npm-build:
+    name: npm-build工作
     runs-on: ubuntu-latest
+
     steps:
-      - run: pwd
-      - run: npm --version
-      - run: npm install
-      - run: npm run build
+      - name: 读取仓库内容
+        uses: actions/checkout@v4
+
+      - name: 安装依赖，项目打包
+        run: |
+          npm install
+          npm run build
+
+      - name: 部署
+        id: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # 构建输出目录
+          publish_branch: gh-pages # 部署到`gh-pages`分支
+          force_orphan: true # 强制清空目标分支的内容
