@@ -14,18 +14,28 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # 设置环境变量，这里使用的是加密后的密钥
-    - name: Set up environment variables
-      env:
-        ACR_USERNAME: aliyun5694155858
-        ACR_PASSWORD: q3231423581
-
-    # 登录到阿里云容器镜像服务
+    # 直接在工作流程中使用明文密码
     - name: Login to Alibaba Cloud Container Registry
       run: |
-        echo "q3231423581" | docker login --username=aliyun5694155858 crpi-fierbpua1f5su3ae.cn-zhangjiakou.personal.cr.aliyuncs.com
+        echo "q3231423581" | docker login --username aliyun5694155858 --password-stdin https://crpi-fierbpua1f5su3ae.cn-zhangjiakou.personal.cr.aliyuncs.com
 
     # 拉取镜像
     - name: Pull Docker image
       run: |
         docker pull crpi-fierbpua1f5su3ae.cn-zhangjiakou.personal.cr.aliyuncs.com/islilacok/learnner:tagname
+
+    - name: Run Docker container
+      run: |
+        docker run -d --name my-running-container -p 8080:80 crpi-fierbpua1f5su3ae.cn-zhangjiakou.personal.cr.aliyuncs.com/islilacok/learnner:tagname
+
+    # 检查容器是否正在运行
+    - name: Check container status
+      run: |
+        docker ps | grep my-running-container
+
+    # 可选：停止并删除容器
+    - name: Stop and remove container
+      if: always()
+      run: |
+        docker stop my-running-container
+        docker rm my-running-container
